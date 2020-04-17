@@ -1,0 +1,36 @@
+digraph hierarchy{
+
+	subgraph cluster_0 {
+			label="Main stMashine";
+			Init_comport;Help;Prepeared;Help;Exit
+			
+			subgraph cluster_1 {
+				label="stMashine";
+				WriteParam;Ik;Uk;ReadParam
+				
+				
+				{ rank = same; WriteParam ReadParam}
+				{ rank = same; Uk Ik}
+			}
+			
+			
+			// Frst block
+			Init_comport -> Init_comport[label="ReInit()",weight="0.2"];
+			Init_comport -> Prepeared[label="ComPortSeted()",weight="0.2"];
+			
+			Prepeared -> Help[label="GetHelp()",weight="0.4",color=red];		
+			Prepeared -> Init_comport[label="ReInit()",weight="0.4"];	
+			Prepeared -> WriteParam[label="SetCmd(write)",weight="0.4"];	
+			Prepeared -> ReadParam[label="SetCmd(Read)",weight="0.4"];
+			
+			Help -> Prepeared[label="GoBack()",weight="0.4",color=red];
+			
+			// Second block
+			{WriteParam ReadParam}-> Ik[label="ChooseParam(Ik)",weight="0.2"];	
+			{WriteParam ReadParam}-> Uk[label="ChooseParam(Uk)",weight="0.2"];
+			
+			{Ik Uk Init_comport Prepeared WriteParam} -> Exit[label="Close()",weight="0.2"];
+
+		}
+
+}

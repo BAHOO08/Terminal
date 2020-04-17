@@ -1,0 +1,16 @@
+digraph Couriers{
+size="5,5"
+node[shape=record,style=filled,fillcolor=gray95]
+edge[dir=back, arrowtail=empty]
+
+Terminal[label = "{Terminal|- *_state:Terminal| + ReInit()\l+ ComPortSeted()\l+ GetHelp()\l+ GoBack()\l+ Close()\l+ ChangeState(state:State)}"]
+TerminalStates[label = "{TerminalStates|...| + ReInit()\l+ ComPortSeted()\l+ GetHelp()\l}"]
+InitCOMportState[label = "{InitCOMportState|...| + ReInit()\l+ ComPortSeted()\l+ GetHelp()\l}"]
+Prepeared[label = "{InitCOMportState|...| + ReInit()\l+ ComPortSeted()\l+ GetHelp()\l+ SetCmd()\l}"]
+
+
+
+Terminal->TerminalStates[constraint=false, style=dotted]
+TerminalStates->InitCOMportState[constraint=false, style=dotted]
+TerminalStates->Prepeared[constraint=false, style=dotted]
+}

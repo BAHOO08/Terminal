@@ -1,7 +1,7 @@
 #include "InitCOMportState.h"
 #include <iostream>
 #include <Windows.h>
-InitCOMportState::InitCOMportState()
+InitCOMportState::InitCOMportState(Terminal* p)
 {
 	std::cout << "Hello!! Do you want to start setting the COMport?<y><n>" << std::endl;
 	//OpenCOMport

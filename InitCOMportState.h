@@ -8,7 +8,7 @@ class InitCOMportState :
 	public TerminalStates
 {
 public:
-	InitCOMportState();
+	InitCOMportState(Terminal* p);
 	virtual	~InitCOMportState();
 
 	//virtual void ReInit(Terminal *);

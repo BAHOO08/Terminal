@@ -4,24 +4,13 @@
 #include <iostream>
 #include "Terminal.h"
 #include <string>
-#include <map>
-enum CMD_e
-{
-	HELP,
-	BACK,
-	READ,
-	YES,
-	NO
-};
-std::map <std::string, CMD_e> mapping;
+
 
 //mapping["left"] = LEFT;
-
+#include <map>
 int main()
 {
-	mapping["-h"] = HELP;
-	mapping["-r"] = READ;
-	mapping["y"] = YES;
+
 	Terminal terminal;
 	//terminal.COM.OpenCOMport();
 	//terminal.COM.SettingCOM();
@@ -30,19 +19,31 @@ int main()
 	terminal.ComPortSeted();
 	terminal.ReInit();*/
     //std::cout << "Hello World!\n";
+
+
+
+	std::string cmd;
 	while (true)
 	{
-		std::string cmd;
 		std::getline(std::cin, cmd); // полностью извлекаем строку в переменную myName
-		if (mapping.find(cmd) != mapping.end())
+
+		//Костыль
+		auto tmp = terminal.GetMapList();
+		auto t = tmp.end();
+		auto t2 = tmp.find(cmd);
+		//if (terminal.GetMapList().find(cmd) != terminal.GetMapList().end())
+		if (t2 != t) // Конец костыля
 		{
-			switch (mapping[cmd])
+			switch (terminal.GetMapList()[cmd])
 			{
-			case CMD_e::HELP: 
+			case Terminal::CMD_e::HELP_cmd:
 				terminal.GetHelp();
 				break;
-			case CMD_e::YES:
+			case Terminal::CMD_e::YES:
 				terminal.AgreeAction();
+				break;
+			case Terminal::CMD_e::WRITE_IK_cmd:
+				terminal.ChangeState(Terminal::State::WRITE_IK_STATE);
 				break;
 			default:
 				break;
@@ -50,3 +51,9 @@ int main()
 		}
 	}
 }
+
+
+/*
+unsigned parts[4] = get_float_from_serial();
+float* value = (float*)parts;
+*/
